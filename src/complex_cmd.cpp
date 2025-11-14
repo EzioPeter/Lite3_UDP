@@ -35,16 +35,15 @@ int main() {
     socklen_t server_addr_len = sizeof(server_addr);
 
     struct ComplexCmd cmd = {0};
-    cmd.velocity = 0.5;
+    cmd.velocity = -1.0;
     cmd.head.code = 0x141;
     cmd.head.paramters_size = sizeof(cmd.velocity);
     cmd.head.type = 1;
 
-    struct CommandHead auto_mode = {
-        0x21010C03,  // 自主模式
-        0,
-        0
-    };
+    struct CommandHead auto_mode = {0};
+    auto_mode.code = 0x21010C03;
+    auto_mode.paramters_size = 0;
+    auto_mode.type = 0;
     
     // 1. 创建UDP Socket
     if ((client_fd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
