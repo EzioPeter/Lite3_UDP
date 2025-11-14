@@ -10,7 +10,7 @@ The code follows the agreement of the motion SDK manual and it use the UDP proto
 
 ## Usage
 
-1. Compile the code
+1. Compile the code.
 
    ```bash
    cd Lite3_UDP
@@ -28,15 +28,18 @@ The code follows the agreement of the motion SDK manual and it use the UDP proto
    // const string SERVER_IP = "192.168.1.120";
    ```
 
-3. Run the code
+3. Run the code.
 
    ```bash
+   # For test, run this command first
+   ./complex_cmd
+   # For your designed use, run this command
    ./lite3_command
    ```
 
 ## Problems
 
-1. The UDP may not work when you start the quadruped robot. You need to login the perception computer and publish the command for once, waiting for the rotation of the quadruped robot. Then you stop the publishing and run the code again. It may be a bug of the Lite3 quadruped robot.
+1. When you first start the quadruped robot and there are no other operations, UDP may not work. You need to login the perception computer and publish the command for once, waiting for the rotation of the quadruped robot. Then you stop the publishing and run the code again. It may be a bug of the Lite3 quadruped robot.
     ```bash
     rostopic pub /cmd_vel geometry_msgs/Twist -r 10 "linear:
         x: 0.0
