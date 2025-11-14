@@ -9,9 +9,14 @@ using namespace std;
 
 #pragma pack(push, 1)
 struct CommandHead{ 
- uint32_t code;
- uint32_t paramters_size;
- uint32_t type;
+    uint32_t code;
+    uint32_t paramters_size;
+    uint32_t type;
+};
+struct ComplexCmd
+{
+    CommandHead head;
+    double velocity;
 };
 #pragma pack(pop)
 
@@ -29,9 +34,15 @@ int main() {
     struct sockaddr_in server_addr;     // 服务器地址结构
     socklen_t server_addr_len = sizeof(server_addr);
 
-    struct CommandHead cmd_head = {
-        0x21010135,  // 旋转指令码
-        int_to_uint32_complement(-9553),
+    struct ComplexCmd cmd = {0};
+    cmd.velocity = 0.5;
+    cmd.head.code = 0x141;
+    cmd.head.paramters_size = sizeof(cmd.velocity);
+    cmd.head.type = 1;
+
+    struct CommandHead auto_mode = {
+        0x21010C03,  // 自主模式
+        0,
         0
     };
     
@@ -57,8 +68,8 @@ int main() {
         // 发送数据
         ssize_t send_len = sendto(
             client_fd,
-            &cmd_head,                  // 发送指令结构体
-            sizeof(cmd_head),           // 长度为结构体大小
+            &cmd,                  // 发送指令结构体
+            sizeof(cmd.head) + cmd.head.paramters_size,           // 长度为结构体大小
             0,
             (struct sockaddr*)&server_addr,
             server_addr_len
@@ -68,7 +79,22 @@ int main() {
             close(client_fd);
             exit(EXIT_FAILURE);
         }        
-        usleep(10000);
+        usleep(5000);
+        // 发送数据
+        ssize_t send_len_auto = sendto(
+            client_fd,
+            &auto_mode,                  // 发送指令结构体
+            sizeof(auto_mode),           // 长度为结构体大小
+            0,
+            (struct sockaddr*)&server_addr,
+            server_addr_len
+        );
+        if (send_len_auto == -1) {
+            perror("sendto failed");
+            close(client_fd);
+            exit(EXIT_FAILURE);
+        }        
+        usleep(5000);
     }
     // 关闭Socket
     close(client_fd);
