@@ -35,7 +35,7 @@ int main() {
     socklen_t server_addr_len = sizeof(server_addr);
 
     struct ComplexCmd cmd = {0};
-    cmd.velocity = -1.0;
+    cmd.velocity = 0.5;
     cmd.head.code = 0x141;
     cmd.head.paramters_size = sizeof(cmd.velocity);
     cmd.head.type = 1;
