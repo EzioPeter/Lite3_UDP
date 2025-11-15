@@ -7,7 +7,10 @@ using namespace std;
 
 int main() {
     // 配置服务器IP和端口
-    const string SERVER_IP = "192.168.2.1"; // 机器狗IP
+    // wireless
+    // const string SERVER_IP = "192.168.2.1";
+    // ethernet
+    const string SERVER_IP = "192.168.1.120";
     const int SERVER_PORT = 43893;
 
     // 创建发送器实例
