@@ -39,7 +39,7 @@ The code follows the agreement of the motion SDK manual and it use the UDP proto
 
 ## Problems
 
-1. When you first start the quadruped robot and there are no other operations, UDP may not work. You need to login the perception computer and publish the command for once, waiting for the rotation of the quadruped robot. Then you stop the publishing and run the code again. It may be a bug of the Lite3 quadruped robot.
+1. When you first start the quadruped robot and there are no other operations, UDP may not work. You need to login the perception computer and publish the command for once, waiting for the rotation of the quadruped robot. Then you stop the publishing and run the code again. It may be a bug of the Lite3 quadruped robot. Similarly, if you see the same problem after you successfully run the code, you need to login the perception computer and publish the command again.
     ```bash
     rostopic pub /cmd_vel geometry_msgs/Twist -r 10 "linear:
         x: 0.0

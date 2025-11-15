@@ -43,7 +43,7 @@ class UdpCommandSender {
         bool send_complex_cmd(double velocity, uint32_t code = 0x141, uint32_t type = 1);
 
         // 发送自动模式指令
-        bool send_auto_mode(uint32_t code = 0x21010C03, uint32_t type = 0);
+        bool send_auto_mode(uint32_t code = 0x21010C03, uint32_t paramters_size = 0, uint32_t type = 0);
 
         // 发送心跳指令
         bool send_heartbeat();

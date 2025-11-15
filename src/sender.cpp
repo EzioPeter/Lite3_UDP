@@ -5,6 +5,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <stdexcept>
+#include <unistd.h> // 用于usleep
 
 using namespace std;
 
@@ -81,11 +82,12 @@ bool UdpCommandSender::send_complex_cmd(double velocity, uint32_t code, uint32_t
         perror("send_complex_cmd failed");
         return false;
     }
+    usleep(500);
     return true;
 }
 
 // 不传参默认发送自动模式指令，传参则可认为是发送SimpleCmd指令
-bool UdpCommandSender::send_auto_mode(uint32_t code, uint32_t type) {
+bool UdpCommandSender::send_auto_mode(uint32_t code, uint32_t paramters_size, uint32_t type) {
     if (client_fd == -1) {
         cerr << "Socket not initialized" << endl;
         return false;
@@ -93,7 +95,7 @@ bool UdpCommandSender::send_auto_mode(uint32_t code, uint32_t type) {
 
     CommandHead auto_mode = {0};
     auto_mode.code = code;
-    auto_mode.paramters_size = 0;
+    auto_mode.paramters_size = paramters_size;
     auto_mode.type = type;
 
     ssize_t send_len = sendto(
@@ -109,18 +111,19 @@ bool UdpCommandSender::send_auto_mode(uint32_t code, uint32_t type) {
         perror("send_auto_mode failed");
         return false;
     }
+    usleep(500);
     return true;
 }
 
 // 发送心跳指令
 bool UdpCommandSender::send_heartbeat() {
-    return send_auto_mode(0x21040001, 0); // 复用自动模式发送函数，指定心跳指令码
+    return send_auto_mode(0x21040001, 0, 0); // 复用自动模式发送函数，指定心跳指令码
 }
 
 // 发送停止指令
 bool UdpCommandSender::send_stop_all() {
     // 这里假设停止指令需要发送多个0速度指令（根据实际需求调整）
     bool ret1 = send_complex_cmd(0.0); // 停止velocity
-    bool ret2 = send_auto_mode(0x21010130, 0); // 停止前进
+    bool ret2 = send_auto_mode(0x21010130, 0, 0); // 停止前进
     return ret1 && ret2;
 }

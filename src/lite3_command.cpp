@@ -20,14 +20,13 @@ int main() {
     try {
         cout << "Starting to send commands..." << endl;
         while (true) {
-            // 发送ComplexCmd（速度1.0）
-            // sender.send_complex_cmd(1.0);    // 旋转
-            // sender.send_complex_cmd(-0.5, 0x145);   // 左右平移
-            sender.send_complex_cmd(0.2, 0x140);    // 前后平移
-            usleep(5000); // 5ms
-
             // 发送自动模式指令
             sender.send_auto_mode();
+            usleep(5000); // 5ms
+            // 发送ComplexCmd（速度1.0）
+            sender.send_complex_cmd(-0.5);    // 旋转
+            sender.send_complex_cmd(0.2, 0x145);   // 左右平移
+            // sender.send_complex_cmd(0.2, 0x140);    // 前后平移
             usleep(5000); // 5ms
         }
     } catch (const exception& e) {
