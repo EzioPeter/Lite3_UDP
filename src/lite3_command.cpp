@@ -21,11 +21,11 @@ int main() {
         cout << "Starting to send commands..." << endl;
         while (true) {
             // 发送ComplexCmd（速度-1.0）
-            // sender.send_complex_cmd(-1.0);
+            sender.send_complex_cmd(-1.0);
             usleep(5000); // 5ms
 
             // 发送自动模式指令
-            // sender.send_auto_mode();
+            sender.send_auto_mode();
             usleep(5000); // 5ms
         }
     } catch (const exception& e) {
@@ -33,6 +33,6 @@ int main() {
     }
 
     // 停止所有指令（程序退出前）
-    // sender.send_stop_all();
+    sender.send_stop_all();
     return 0;
 }
