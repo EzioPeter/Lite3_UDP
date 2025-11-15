@@ -34,7 +34,7 @@ The code follows the agreement of the motion SDK manual and it use the UDP proto
    # For test, run this command first
    ./complex_cmd
    # For your designed use, run this command
-   ./lite3_command
+   ./example
    ```
 
 ## Problems

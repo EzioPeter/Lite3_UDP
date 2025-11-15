@@ -13,5 +13,7 @@ add_executable(complex_cmd test/complex_cmd.cpp)
 
 add_library(sender SHARED src/sender.cpp)
 add_executable(lite3_command src/lite3_command.cpp)
+add_executable(example src/lite3_command_example.cpp)
 target_link_libraries(lite3_command sender)
+target_link_libraries(example sender)
 

@@ -20,8 +20,8 @@ int main() {
     try {
         cout << "Starting to send commands..." << endl;
         while (true) {
-            // 发送ComplexCmd（速度1.0）
-            sender.send_complex_cmd(1.0);
+            // 发送ComplexCmd（速度-1.0）
+            sender.send_complex_cmd(-1.0);
             usleep(5000); // 5ms
 
             // 发送自动模式指令
