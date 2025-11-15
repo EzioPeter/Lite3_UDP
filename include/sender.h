@@ -42,13 +42,13 @@ class UdpCommandSender {
         // 发送ComplexCmd指令
         bool send_complex_cmd(double velocity, uint32_t code = 0x141, uint32_t type = 1);
 
-        // 发送自动模式指令（原auto_mode）
+        // 发送自动模式指令
         bool send_auto_mode(uint32_t code = 0x21010C03, uint32_t type = 0);
 
-        // 发送心跳指令（参考Python的heartbeat）
+        // 发送心跳指令
         bool send_heartbeat();
 
-        // 发送停止指令（参考Python的stop_all）
+        // 发送停止指令
         bool send_stop_all();
 };
 

@@ -84,7 +84,7 @@ bool UdpCommandSender::send_complex_cmd(double velocity, uint32_t code, uint32_t
     return true;
 }
 
-// 发送自动模式指令
+// 不传参默认发送自动模式指令，传参则可认为是发送SimpleCmd指令
 bool UdpCommandSender::send_auto_mode(uint32_t code, uint32_t type) {
     if (client_fd == -1) {
         cerr << "Socket not initialized" << endl;
@@ -112,15 +112,15 @@ bool UdpCommandSender::send_auto_mode(uint32_t code, uint32_t type) {
     return true;
 }
 
-// 发送心跳指令（参考Python的heartbeat）
+// 发送心跳指令
 bool UdpCommandSender::send_heartbeat() {
     return send_auto_mode(0x21040001, 0); // 复用自动模式发送函数，指定心跳指令码
 }
 
-// 发送停止指令（参考Python的stop_all）
+// 发送停止指令
 bool UdpCommandSender::send_stop_all() {
     // 这里假设停止指令需要发送多个0速度指令（根据实际需求调整）
     bool ret1 = send_complex_cmd(0.0); // 停止velocity
-    bool ret2 = send_auto_mode(0x21010130, 0); // 停止前进（示例指令码）
+    bool ret2 = send_auto_mode(0x21010130, 0); // 停止前进
     return ret1 && ret2;
 }
