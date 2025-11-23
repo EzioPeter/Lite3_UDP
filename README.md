@@ -1,6 +1,6 @@
 # Lite3_UDP
 
-Lite3_UDP is a repository for the DeepRobotics Lite3 quadruped robot. It contains the code for the UDP communication between the robot motion computer and the developer computer. The code is written in C++ and follows the agreement of the Lite3 quadruped robot in the motion SDK manual. The motion SDK manual needs to contact the staff of DeepRobotics.
+Lite3_UDP is a repository for the DeepRobotics Lite3 quadruped robot. It contains the code for the UDP communication between the robot motion computer and the developer computer. The code is written in C++ and follows the agreement of the Lite3 quadruped robot in the motion SDK manual. The motion SDK manual needs to contact the staff of DeepRobotics. If you find it useful, please kindly give me a star, thank you!
 
 ## Motivation
 
